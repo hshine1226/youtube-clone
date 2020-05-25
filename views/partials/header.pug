@@ -14,7 +14,7 @@ header.header
 					a(href=routes.login) Log In
 			else
 				li
-					a(href=routes.upload) Upload
+					a(href=`/videos${routes.upload}`) Upload
 				li
 					// local variable에서 받아온 user.id를 userDetail로 보내준다.
 					a(href=routes.userDetail(user.id)) Profile
