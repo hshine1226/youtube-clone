@@ -2,9 +2,11 @@ extends layouts/main
 
 block content
     .form-container
-        form(action=`/videos${routes.upload}`, method="post")
+        // multer를 사용하기 위해서 enctype에 multipart/form-data를 추가한다.
+        form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
             label(for="file") Video File
-            input(type="file", id='file', name='file', required=true)
+            // Video 파일만 선택하도록 accept="video/*"을 추가한다.
+            input(type="file", id='file', name='videoFile', required=true, accept="video/*")
             input(type="text", placeholder="Title", name="title", required=true)
             textarea(name="description", placeholder="Description" cols="30", rows="3", required=true)
             input(type="submit", value="Upload Video")
