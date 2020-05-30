@@ -122,6 +122,7 @@ dist/
 # Temporary folders
 tmp/
 temp/
+uploads
 
 ### VisualStudioCode ###
 .vscode/*
