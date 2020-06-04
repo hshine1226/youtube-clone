@@ -9,4 +9,4 @@ block content
       // textarea는 value값이 없기 때문에 아래와 같이 description을 지정해준다.
       textarea(name="description", placeholder="Description")=video.description
       input(type="submit", value="Update Video")
-    a.form-container__link.form-container__link--delete(href=`/videos${routes.deleteVideo}`) Delete Video
+    a.form-container__link.form-container__link--delete(href=routes.deleteVideo(video.id)) Delete Video

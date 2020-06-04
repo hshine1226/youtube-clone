@@ -3,7 +3,8 @@ import Video from "../models/Video";
 
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({});
+    // video 정렬 순서를 바꾸기 위해서 id를 기준으로 정렬했다.
+    const videos = await Video.find({}).sort({ _id: -1 });
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
@@ -11,10 +12,18 @@ export const home = async (req, res) => {
   }
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   const {
     query: { term: searchingBy },
   } = req;
+  let videos = [];
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" },
+    });
+  } catch (err) {
+    // console.log(err);
+  }
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
@@ -43,7 +52,7 @@ export const videoDetail = async (req, res) => {
 
   try {
     const video = await Video.findById(id);
-    res.render("videoDetail", { pageTitle: "Video Detail", video });
+    res.render("videoDetail", { pageTitle: video.title, video });
   } catch (err) {
     res.redirect(routes.home);
   }
@@ -75,5 +84,16 @@ export const postEditVideo = async (req, res) => {
   }
 };
 
-export const deleteVideo = (req, res) =>
-  res.render("deleteVideo", { pageTitle: "Delete Video" });
+export const deleteVideo = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    await Video.findOneAndRemove({ _id: id });
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.redirect(routes.home);
+};
