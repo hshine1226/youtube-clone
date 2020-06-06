@@ -140,3 +140,5 @@ uploads
 package-lock.json
 
 .eslintrc.js
+
+static

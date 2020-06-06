@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 // MongoDB port: 27017(Mongod실행 후 확인)
