@@ -1,12 +1,10 @@
 extends layouts/main
 
 block content
-  .form-container
-    // action=`/videos${routes.editVideo}`에서 아래와 같이 수정했다.
-    form(action=routes.editVideo(video.id), method="post")
-      // input의 value 값을 지정해줌으로써 수정하기 전의 title을 띄워준다.
-      input(type="text", placeholder="Title", name="title", value=video.title)
-      // textarea는 value값이 없기 때문에 아래와 같이 description을 지정해준다.
-      textarea(name="description", placeholder="Description")=video.description
-      input(type="submit", value="Update Video")
-    a.form-container__link.form-container__link--delete(href=routes.deleteVideo(video.id)) Delete Video
+    .form-container
+        form(action=routes.editVideo(video.id), method="post")
+            input(type="text", placeholder="Title", name="title", value=video.title)
+            textarea(name="description", placeholder="Description")=video.description
+            input(type="submit", value="Update Video")
+        a.form-container__link(href=routes.deleteVideo(video.id))
+            button.delete Delete Video
