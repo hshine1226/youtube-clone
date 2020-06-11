@@ -26,7 +26,11 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 
 // Google
 const GOOGLE = "/auth/google";
-const GOOGLE_CALLBACK = "/auth/github/callback";
+const GOOGLE_CALLBACK = "/auth/google/callback";
+
+// Facebook
+const FACEBOOK = "/auth/facebook";
+const FACEBOOK_CALLBACK = "/auth/facebook/callback";
 
 // Router Object
 const routes = {
@@ -68,8 +72,12 @@ const routes = {
 
   github: GITHUB,
   githubCallback: GITHUB_CALLBACK,
+
   google: GOOGLE,
   googleCallback: GOOGLE_CALLBACK,
+
+  facebook: FACEBOOK,
+  facebookCallback: FACEBOOK_CALLBACK,
 };
 
 export default routes;

@@ -70,7 +70,6 @@ export const googleLogin = passport.authenticate("google", {
 });
 
 export const googleLoginCallback = async (_, __, profile, cb) => {
-  console.log(profile);
   const {
     _json: { sub, picture, name, email },
   } = profile;
@@ -93,11 +92,24 @@ export const googleLoginCallback = async (_, __, profile, cb) => {
   }
 };
 
+export const facebookLogin = passport.authenticate("facebook", {
+  scope: ["email"],
+});
+
+export const facebookLoginCallback = (_, __, profile, cb) => {
+  console.log(profile);
+  // Email을 안받아온다.
+};
+
 export const postGithubLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
 export const postGoogleLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
+export const postFacebookLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
