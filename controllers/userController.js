@@ -67,6 +67,10 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
   }
 };
 
+export const postGithubLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
 export const googleLogin = passport.authenticate("google", {
   scope: ["profile", "email"],
 });
@@ -94,21 +98,36 @@ export const googleLoginCallback = async (_, __, profile, cb) => {
   }
 };
 
+export const postGoogleLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
 export const facebookLogin = passport.authenticate("facebook", {
   scope: ["email"],
 });
 
-export const facebookLoginCallback = (_, __, profile) => {
+export const facebookLoginCallback = async (_, __, profile, cb) => {
   console.log(profile);
-  // Email이 안받아와짐
-};
-
-export const postGithubLogin = (req, res) => {
-  res.redirect(routes.home);
-};
-
-export const postGoogleLogin = (req, res) => {
-  res.redirect(routes.home);
+  const {
+    _json: { id, name, email },
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.facebookId = id;
+      user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      facebookId: id,
+      name,
+      email,
+      avatarUrl: `https://graph.facebook.com/${id}/picture?type=large`,
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
 };
 
 export const postFacebookLogin = (req, res) => {
@@ -124,8 +143,19 @@ export const getMe = (req, res) => {
   res.render("userDetail", { pageTitle: "User Detail", user: req.user });
 };
 
-export const userDetail = (req, res) =>
-  res.render("userDetail", { pageTitle: "User Detail" });
+export const userDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const user = await User.findById(id);
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+    console.log(error);
+  }
+};
+
 export const changePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });
 export const editProfile = (req, res) =>
