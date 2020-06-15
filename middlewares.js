@@ -3,6 +3,7 @@ import routes from "./routes";
 
 // multer를 이용해서 file 저장 주소 지정
 const multerVideo = multer({ dest: "uploads/videos/" });
+const multerAvatar = multer({ dest: "uploads/avatars/" });
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "YouTube";
@@ -30,3 +31,4 @@ export const onlyPrivate = (req, res, next) => {
 
 // 오직 하나의 파일만 업로드 하도록 설정(single(filedname))
 export const uploadVideo = multerVideo.single("videoFile");
+export const uploadAvatar = multerAvatar.single("avatar");

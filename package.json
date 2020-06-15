@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "nodemon --exec babel-node init.js",
-    "dev:server": "nodemon --exec babel-node init.js --ignore 'scss'",
+    "dev:server": "nodemon --exec babel-node init.js --ignore 'scss' --ignore 'static'",
     "dev:assets": "WEBPACK_ENV=development webpack -w",
     "build:assets": "WEBPACK_ENV=production webpack"
   },
