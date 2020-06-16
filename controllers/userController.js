@@ -7,7 +7,7 @@ export const getJoin = (req, res) => {
 };
 
 export const postJoin = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const {
     body: { name, email, password, password2 },
   } = req;
@@ -24,7 +24,7 @@ export const postJoin = async (req, res, next) => {
       // 미들웨어 수행후 다음으로 넘어가기
       next();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.redirect(routes.home);
     }
     // To Do: Log user in
@@ -46,7 +46,7 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
   const {
     _json: { id, avatar_url: avatarUrl, name, email },
   } = profile;
-  console.log(avatarUrl);
+  // console.log(avatarUrl);
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -107,7 +107,7 @@ export const facebookLogin = passport.authenticate("facebook", {
 });
 
 export const facebookLoginCallback = async (_, __, profile, cb) => {
-  console.log(profile);
+  // console.log(profile);
   const {
     _json: { id, name, email },
   } = profile;
@@ -148,7 +148,7 @@ export const userDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate("videos");
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     res.redirect(routes.home);
@@ -185,7 +185,7 @@ export const postEditProfile = async (req, res) => {
     body: { name, email },
     file,
   } = req;
-  console.log(file);
+  // console.log(file);
   try {
     await User.findByIdAndUpdate(req.user.id, {
       name,

@@ -10,6 +10,7 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.routes = routes;
   // db 생기기 전까지 쓰일 가짜 정보
   res.locals.loggedUser = req.user || null;
+  // console.log(res.locals.loggedUser);
   next();
 };
 
