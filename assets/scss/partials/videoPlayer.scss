@@ -1,41 +1,65 @@
-.videoPlayer {
-  position: relative;
-  &:hover {
-    .videoPlayer__controls {
-      opacity: 1;
-    }
-  }
-  .video {
-    max-width: 100%;
-  }
-  .videoPlayer__controls {
-    opacity: 0;
-    transition: opacity 0.4s linear;
-    color: white;
-    position: absolute;
-    bottom: 0px;
+.video-detail__container {
+  width: 100%;
+  .videoPlayer {
+    position: relative;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    font-size: 15px;
-    .videoPlayer__column:first-child {
-      display: flex;
-      align-items: center;
-      span:first-child {
-        margin-right: 10px;
+    &:hover {
+      .videoPlayer__controls {
+        opacity: 1;
       }
     }
-    .videoPlayer__column:nth-child(2) {
-      justify-self: center;
+    video {
+      width: 100%;
+      max-width: 100%;
     }
-    .videoPlayer__column:nth-child(3) {
-      justify-self: end;
-    }
-    i {
-      font-size: 25px;
-      cursor: pointer;
+    .videoPlayer__controls {
+      width: -webkit-fill-available;
+      opacity: 0;
+      transition: opacity 0.4s linear;
+      color: white;
+      position: absolute;
+      bottom: 0px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      font-size: 15px;
+
+      .videoPlayer__column:first-child {
+        display: flex;
+        align-items: center;
+        .videoPlayer__volume-container {
+          opacity: 1;
+          position: absolute;
+          top: -75px;
+          left: -35px;
+          transform: rotate(-90deg);
+          z-index: 10;
+          width: auto;
+          padding: 0;
+          margin: 0;
+        }
+        #jsVolume {
+          height: 10px;
+          width: 100px;
+          border-radius: 5px;
+          background-color: #d7dcdf;
+          outline: none;
+        }
+        #jsVolumeBtn {
+          margin-right: 10px;
+        }
+      }
+      .videoPlayer__column:nth-child(2) {
+        justify-self: center;
+      }
+      .videoPlayer__column:nth-child(3) {
+        justify-self: end;
+      }
+      i {
+        font-size: 25px;
+        cursor: pointer;
+      }
     }
   }
 }
