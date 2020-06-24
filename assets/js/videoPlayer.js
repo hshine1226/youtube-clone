@@ -7,6 +7,12 @@ const currentTime = document.getElementById("jsCurrentTime");
 const totalTime = document.getElementById("jsTotalTime");
 const volumeRange = document.getElementById("jsVolume");
 
+const registerView = () => {
+  const videoId = window.location.href.split("/videos/")[1];
+
+  fetch(`/api/${videoId}/view`, { method: "POST" });
+};
+
 // console.log(videoPlayer);
 function handlePlayClick() {
   if (videoPlayer.paused) {
@@ -91,6 +97,8 @@ function setTotalTime() {
 }
 
 function handleEnded() {
+  // 비디오가 끝나면 view를 하나 증가시킨다.
+  registerView();
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = "<i class='fas fa-play'></i>";
 }
@@ -109,10 +117,10 @@ function handleDrag(event) {
 }
 
 function init() {
+  // videoPlayer.currentTime = 620;
   videoPlayer.volume = 0.5;
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
-
   fullScrnBtn.addEventListener("click", goFullScreen);
   // duration 즉, totalTime이 변경되면 setTotalTime 함수를 호출한다.
   videoPlayer.addEventListener("durationchange", setTotalTime);
