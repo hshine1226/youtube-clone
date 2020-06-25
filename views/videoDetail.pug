@@ -32,6 +32,10 @@ block content
             form.add__comment#jsAddComment
                 input(type="text", placeholder="Add a comment")
             ul.video__comments-list#jsCommentList
-                each comment in video.comments.reverse()
-                    li
-                        span=comment.text
+                each comment, idx in video.comments.reverse()
+                    .video__comments-list-container
+                        li
+                            span=comment.text                            
+                        if loggedUser !== null
+                            if String(video.comments[idx].creator) === String(loggedUser.id)
+                                span.fas.fa-trash-alt(id=`${comment._id}`) 
