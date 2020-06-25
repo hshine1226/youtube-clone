@@ -1,18 +1,26 @@
 import axios from "axios";
 
 const addCommentForm = document.getElementById("jsAddComment");
+
 const commentList = document.getElementById("jsCommentList");
 const commentNumber = document.getElementById("jsCommentNumber");
 
 const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
 };
-const addComment = (comment) => {
+const addComment = (comment, commentId) => {
+  const div = document.createElement("div");
   const li = document.createElement("li");
   const span = document.createElement("span");
+  const delBtn = document.createElement("span");
+  delBtn.id = commentId;
+  delBtn.classList.add("fas");
+  delBtn.classList.add("fa-trash-alt");
   span.innerHTML = comment;
   li.appendChild(span);
-  commentList.prepend(li);
+  div.appendChild(li);
+  div.appendChild(delBtn);
+  commentList.prepend(div);
   increaseNumber();
 };
 
@@ -27,7 +35,8 @@ const sendComment = async (comment) => {
   });
   // status code가 성공적(200)일때만 comment(실시간인척하는)를 추가한다.
   if (response.status === 200) {
-    addComment(comment);
+    const commentId = response.data;
+    addComment(comment, commentId);
   }
 };
 
