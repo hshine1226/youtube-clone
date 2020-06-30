@@ -1,9 +1,34 @@
 import multer from "multer";
+import multerS3 from "multer-s3";
+import aws from "aws-sdk";
 import routes from "./routes";
 
+const s3 = new aws.S3({
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+  accessKeyId: process.env.AWS_KEY,
+  region: "ap-northeast-2",
+});
+
 // multer를 이용해서 file 저장 주소 지정
-const multerVideo = multer({ dest: "uploads/videos/" });
-const multerAvatar = multer({ dest: "uploads/avatars/" });
+// const multerVideo = multer({ dest: "uploads/videos/" });
+const multerVideo = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "youtube-clone-jh/video",
+  }),
+});
+const multerAvatar = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "youtube-clone-jh/avatar",
+  }),
+});
+
+// 오직 하나의 파일만 업로드 하도록 설정(single(filedname))
+export const uploadVideo = multerVideo.single("videoFile");
+export const uploadAvatar = multerAvatar.single("avatar");
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "YouTube";
@@ -29,7 +54,3 @@ export const onlyPrivate = (req, res, next) => {
     res.redirect(routes.home);
   }
 };
-
-// 오직 하나의 파일만 업로드 하도록 설정(single(filedname))
-export const uploadVideo = multerVideo.single("videoFile");
-export const uploadAvatar = multerAvatar.single("avatar");
