@@ -2,6 +2,9 @@ extends layouts/main
 
 block content
     .form-container
+        .record-container#jsRecordContainer
+            video#jsVideoPreview
+            button#jsRecordBtn Start Recording
         // multer를 사용하기 위해서 enctype에 multipart/form-data를 추가한다.
         form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
             div.fileUpload
