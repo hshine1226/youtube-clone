@@ -29,7 +29,16 @@ function handlePlayClick() {
 function handleVolumeClick() {
   if (videoPlayer.muted) {
     videoPlayer.muted = false;
-    volumeBtn.innerHTML = "<i class='fas fa-volume-up'></i>";
+    // volumeBtn.innerHTML = "<i class='fas fa-volume-up'></i>";
+
+    if (videoPlayer.volume === 0) {
+      volumeBtn.innerHTML = "<i class='fas fa-volume-mute'></i>";
+    } else if (videoPlayer.volume < 0.4) {
+      volumeBtn.innerHTML = "<i class='fas fa-volume-down'></i>";
+    } else {
+      videoPlayer.muted = false;
+      volumeBtn.innerHTML = "<i class='fas fa-volume-up'></i>";
+    }
     volumeRange.value = videoPlayer.volume;
   } else {
     videoPlayer.muted = true;
@@ -110,6 +119,8 @@ function handleDrag(event) {
   videoPlayer.volume = value;
   if (videoPlayer.volume === 0) {
     volumeBtn.innerHTML = "<i class='fas fa-volume-mute'></i>";
+  } else if (videoPlayer.volume < 0.4) {
+    volumeBtn.innerHTML = "<i class='fas fa-volume-down'></i>";
   } else {
     videoPlayer.muted = false;
     volumeBtn.innerHTML = "<i class='fas fa-volume-up'></i>";
