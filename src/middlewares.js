@@ -17,15 +17,8 @@ const multerVideo = multer({
     s3,
     acl: "public-read",
     bucket: "youtube-clone-jh/video",
-  }),
-});
-const multerAvatar = multer({
-  storage: multerS3({
-    s3,
-    acl: "public-read",
-    bucket: "youtube-clone-jh/avatar",
     key: function (req, file, cb) {
-      const extension = path.extname(file.originalname);
+      let extension = path.extname(file.originalname);
       cb(
         null,
         Math.random().toString(36).substring(2, 12) +
@@ -33,6 +26,13 @@ const multerAvatar = multer({
           extension
       );
     },
+  }),
+});
+const multerAvatar = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "youtube-clone-jh/avatar",
   }),
 });
 
