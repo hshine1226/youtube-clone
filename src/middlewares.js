@@ -1,6 +1,7 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
+import path from "path";
 import routes from "./routes";
 
 const s3 = new aws.S3({
@@ -23,6 +24,10 @@ const multerAvatar = multer({
     s3,
     acl: "public-read",
     bucket: "youtube-clone-jh/avatar",
+    key: function (req, file, cb) {
+      const extension = path.extname(file.originalname);
+      cb(null, Date.now().toString() + extension);
+    },
   }),
 });
 
