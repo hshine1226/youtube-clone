@@ -10,6 +10,10 @@ import {
 } from "./controllers/userController";
 import routes from "./routes";
 
+const baseUrl = process.env.PRODUCTION
+  ? "https://protected-oasis-82576.herokuapp.com"
+  : "http://localhost:4000";
+
 passport.use(User.createStrategy());
 
 passport.use(
@@ -17,7 +21,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `http://localhost:4000${routes.githubCallback}`,
+      callbackURL: `${baseUrl}${routes.githubCallback}`,
     },
     githubLoginCallback
   )
@@ -28,7 +32,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `http://localhost:4000${routes.googleCallback}`,
+      callbackURL: `${baseUrl}${routes.googleCallback}`,
     },
     googleLoginCallback
   )
@@ -39,7 +43,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: `http://localhost:4000${routes.facebookCallback}`,
+      callbackURL: `${baseUrl}${routes.facebookCallback}`,
       profileFields: ["id", "displayName", "photos", "email"],
     },
     facebookLoginCallback
