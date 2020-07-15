@@ -26,7 +26,12 @@ const multerAvatar = multer({
     bucket: "youtube-clone-jh/avatar",
     key: function (req, file, cb) {
       const extension = path.extname(file.originalname);
-      cb(null, Date.now().toString() + extension);
+      cb(
+        null,
+        Math.random().toString(36).substring(2, 12) +
+          Date.now().toString() +
+          extension
+      );
     },
   }),
 });
