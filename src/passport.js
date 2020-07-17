@@ -11,7 +11,7 @@ import {
 import routes from "./routes";
 
 const baseUrl = process.env.PRODUCTION
-  ? "https://protected-oasis-82576.herokuapp.com"
+  ? "https://bellamy-tube.herokuapp.com"
   : "http://localhost:4000";
 
 passport.use(User.createStrategy());
