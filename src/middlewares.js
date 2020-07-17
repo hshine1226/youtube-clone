@@ -19,13 +19,8 @@ const multerVideo = multer({
     acl: "public-read",
     bucket: "youtube-clone-jh/video",
     key: function (req, file, cb) {
-      let extension = path.extname(file.originalname);
-      cb(
-        null,
-        Math.random().toString(36).substring(2, 12) +
-          Date.now().toString() +
-          extension
-      );
+      let extention = path.extname(file.originalname);
+      cb(null, Date.now().toString() + extension);
     },
   }),
 });
