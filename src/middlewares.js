@@ -12,6 +12,7 @@ const s3 = new aws.S3({
 
 // multer를 이용해서 file 저장 주소 지정
 // const multerVideo = multer({ dest: "uploads/videos/" });
+// Add key for iphone
 const multerVideo = multer({
   storage: multerS3({
     s3,
