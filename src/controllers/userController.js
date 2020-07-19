@@ -7,11 +7,11 @@ export const getJoin = (req, res) => {
 };
 
 export const postJoin = async (req, res, next) => {
-  // console.log(req.body);
   const {
     body: { name, email, password, password2 },
   } = req;
   if (password !== password2) {
+    req.flash("error", "비밀번호가 일치하지 않습니다.");
     res.status(400); // 잘못된 요청
     res.render("join", { pageTitle: "Join" });
   } else {
@@ -37,9 +37,14 @@ export const getLogin = (req, res) =>
 export const postLogin = passport.authenticate("local", {
   failureRedirect: routes.login,
   successRedirect: routes.home,
+  successFlash: "환영합니다.",
+  failureFlash: "로그인 할 수 없습니다. 이메일 혹은 패스워드를 확인하세요.",
 });
 
-export const githubLogin = passport.authenticate("github");
+export const githubLogin = passport.authenticate("github", {
+  successFlash: "환영합니다.",
+  failureFlash: "로그인에 실패했습니다.",
+});
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
   // console.log(profile);
@@ -73,6 +78,8 @@ export const postGithubLogin = (req, res) => {
 
 export const googleLogin = passport.authenticate("google", {
   scope: ["profile", "email"],
+  successFlash: "환영합니다.",
+  failureFlash: "로그인에 실패했습니다.",
 });
 
 export const googleLoginCallback = async (_, __, profile, cb) => {
@@ -136,6 +143,7 @@ export const postFacebookLogin = (req, res) => {
 
 export const logout = (req, res) => {
   req.logout();
+  req.flash("success", "안녕히가세요.");
   res.redirect(routes.home);
 };
 
@@ -151,6 +159,7 @@ export const userDetail = async (req, res) => {
     const user = await User.findById(id).populate("videos");
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
+    req.flash("error", "해당 유저를 찾을수 없습니다.");
     res.redirect(routes.home);
     console.log(error);
   }
@@ -165,6 +174,7 @@ export const postChangePassword = async (req, res) => {
   } = req;
   try {
     if (newPassword !== newPassword1) {
+      req.flash("error", "패스워드가 일치하지 않습니다.");
       res.status(400);
       res.redirect(`/users${routes.changePassword}`);
       return;
@@ -172,6 +182,7 @@ export const postChangePassword = async (req, res) => {
     await req.user.changePassword(oldPassword, newPassword);
     res.redirect(routes.me);
   } catch (error) {
+    req.flash("error", "패스워드를 변경할 수 없습니다.");
     res.status(400);
     res.redirect(`/users${routes.changePassword}`);
   }
@@ -194,6 +205,7 @@ export const postEditProfile = async (req, res) => {
     });
     res.redirect(routes.me);
   } catch (error) {
+    req.flash("error", "프로필 변경에 실패했습니다.");
     res.redirect(routes.editProfile);
   }
 };
