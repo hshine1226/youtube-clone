@@ -9,6 +9,11 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+    .u-avatar {
+      background-color: #bdc3c7;
+      width: 150px;
+      height: 150px;
+    }
     .profile__username {
       font-size: 18px;
       margin-top: 15px;
