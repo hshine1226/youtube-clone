@@ -1,11 +1,17 @@
 header.header
 	.header__wrapper
 		.header__column
-			a(href=routes.home)
+			a.youtube-logo(href=routes.home)
 				i.fab.fa-youtube
+				span BellmyTube
 		.header__column
-			form(action=routes.search, method="get")
-				input(type="text", placeholder="Search by term...", name="term")
+			form(action=routes.search, method="get", id="search-form")
+				.input__container
+					input(type="text", placeholder="검색", name="term")
+					<a href="#" onclick="document.getElementById('search-form').submit()">
+						.search__container
+							i.fas.fa-search
+					</a>
 		.header__column
 			ul
 				if !loggedUser
@@ -15,9 +21,13 @@ header.header
 						a(href=routes.login) Log In
 				else
 					li
-						a(href=`/videos${routes.upload}`) Upload
+						a(href=`/videos${routes.upload}`)
+							.upload-icon
+								i.fas.fa-upload
 					li
-						// local variable에서 받아온 user.id를 userDetail로 보내준다.
-						a(href=routes.me) Profile
+						a(href=routes.me)
+							img.u-avatar(src=loggedUser.avatarUrl)
 					li
-						a(href=routes.logout) Log Out
+						a(href=routes.logout)
+							.logout-icon
+								i.fas.fa-sign-out-alt

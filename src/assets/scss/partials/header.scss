@@ -1,23 +1,75 @@
 .header {
-  background-color: $red;
-  margin-bottom: 50px;
-  .header__wrapper {
-    width: 100%;
-    padding: 5px 0px;
+  background-color: #202020;
+  margin-bottom: 40px;
+  height: 55px;
 
-    margin: 0 auto;
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  .header__wrapper {
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+
     .header__column {
-      i {
-        color: white;
-        font-size: 40px;
+      .youtube-logo {
+        display: flex;
+        align-items: center;
+
+        i {
+          color: #ff0018;
+          font-size: 30px;
+          margin-right: 5px;
+        }
+        span {
+          color: white;
+          font-weight: 800;
+          font-size: 18px;
+        }
       }
+
       &:nth-child(2) {
         width: 100%;
-        justify-self: center;
+        display: flex;
+        justify-content: center;
+        form {
+          width: 100%;
+          .input__container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            input {
+              width: 45%;
+              margin-right: 10px;
+              padding: 7px 15px;
+              font-size: 15px;
+              font-weight: 600;
+              background-color: #121212;
+              border: 1px solid;
+              border-radius: 5px;
+              border-color: #bdc3c7;
+              color: white;
+
+              &::placeholder {
+                font-size: 15px;
+                font-weight: 300;
+                color: #747474;
+              }
+            }
+            .search__container {
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              border: 1px solid;
+              border-color: #bdc3c7;
+              border-radius: 5px;
+              padding: 5px 10px;
+            }
+          }
+          i {
+            color: white;
+            font-size: 20px;
+          }
+        }
       }
       &:last-child {
         justify-self: end;
@@ -27,6 +79,12 @@
         text-decoration: none;
         font-weight: 600;
         text-transform: uppercase;
+        li {
+          width: max-content;
+        }
+        i {
+          font-size: 25px;
+        }
         a {
           text-decoration: none;
           color: white;
@@ -34,20 +92,11 @@
         li:not(:last-child) {
           margin-right: 20px;
         }
-      }
-      form {
-        width: 100%;
-        input {
-          padding: 7px 10px;
-          width: 100%;
-          max-width: none;
-          border-radius: 5px;
-          font-size: 14px;
-          color: $black;
-          font-weight: 600;
-          &::placeholder {
-            font-weight: 300;
-            color: rgba(0, 0, 0, 0.7);
+
+        li:nth-child(2) {
+          .u-avatar {
+            height: 25px;
+            background-color: white;
           }
         }
       }
