@@ -1,8 +1,9 @@
 .videoBlock {
-  width: 100%;
-  video {
-    margin-bottom: 10px;
-    max-width: 100%;
+  // width: 100%;
+  .videoBlock__thumbnail {
+    max-width: 300px;
+    height: 200px;
+    margin-right: 30px;
   }
   .videoBlock__title {
     font-size: 18px;
