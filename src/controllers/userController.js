@@ -19,6 +19,7 @@ export const postJoin = async (req, res, next) => {
       const user = await User({
         name,
         email,
+        avatarUrl: "https://image.flaticon.com/icons/svg/1077/1077114.svg",
       });
       await User.register(user, password);
       // 미들웨어 수행후 다음으로 넘어가기
