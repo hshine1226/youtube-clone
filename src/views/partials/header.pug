@@ -25,8 +25,12 @@ header.header
 							.upload-icon
 								i.fas.fa-upload
 					li
-						a(href=routes.me)
-							img.u-avatar(src=loggedUser.avatarUrl)
+						if loggedUser.avatarUrl
+							a(href=routes.me)
+								img.u-avatar(src=loggedUser.avatarUrl)
+						else	
+							a(href=routes.me)
+								span Profile
 					li
 						a(href=routes.logout)
 							.logout-icon
