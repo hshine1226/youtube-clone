@@ -18,8 +18,9 @@ const multerVideo = multer({
     s3,
     acl: "public-read",
     bucket: "youtube-clone-jh/video",
-    key: function (req, file, cb) {
-      let extension = path.extname(file.originalname);
+    // eslint-disable-next-line object-shorthand, func-names
+    key: function (_req, file, cb) {
+      const extension = path.extname(file.originalname);
       cb(null, Date.now().toString() + extension);
     },
   }),
