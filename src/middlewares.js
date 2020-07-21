@@ -37,7 +37,7 @@ export const uploadVideo = multerVideo.single("videoFile");
 export const uploadAvatar = multerAvatar.single("avatar");
 
 export const localsMiddleware = (req, res, next) => {
-  res.locals.siteName = "YouTube";
+  res.locals.siteName = "BellamyTube";
   res.locals.routes = routes;
   // db 생기기 전까지 쓰일 가짜 정보
   res.locals.loggedUser = req.user || null;
