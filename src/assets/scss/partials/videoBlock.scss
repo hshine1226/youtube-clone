@@ -1,9 +1,13 @@
 .videoBlock {
-  // width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    color: black;
+  }
   .videoBlock__thumbnail {
     max-width: 300px;
     height: 200px;
-    margin-right: 30px;
   }
   .videoBlock__title {
     font-size: 18px;

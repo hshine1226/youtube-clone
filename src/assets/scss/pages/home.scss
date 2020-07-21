@@ -1,3 +1,11 @@
 .home-videos {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+}
+@media screen and (max-width: 1450px) {
+  .home-videos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
