@@ -6,7 +6,7 @@ export const home = async (req, res) => {
   try {
     // video 정렬 순서를 바꾸기 위해서 id를 기준으로 정렬했다.
     const videos = await Video.find({}).populate("avatarUrl").sort({ _id: -1 });
-
+    console.log(videos);
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
