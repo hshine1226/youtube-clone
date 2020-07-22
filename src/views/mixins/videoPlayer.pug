@@ -9,16 +9,14 @@ mixin videoPlayer(video = {})
             .videoPlayer__column
                 progress(id="js-progressBar", value="0", max="100")            
             .videoPlayer__column
-                span
+                .videoPlayer__time-container
                     span#jsCurrentTime 00:00 
                     span / 
                     span#jsTotalTime 00:00
-            .videoPlayer__column
                 .videoPlayer__volume-container#jsVolumeContainer
                     span#jsVolumeBtn
                         i.fas.fa-volume-up
                     input.videoPlayer__volume#jsVolume(type="range", min="0", max="1", step="0.01", value="0.5")    
-                       
-            .videoPlayer__column
                 span#jsFullScreen
                     i.fas.fa-expand
+                

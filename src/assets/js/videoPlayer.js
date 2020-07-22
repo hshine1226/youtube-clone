@@ -4,6 +4,7 @@ const videoContainer = document.getElementById("jsVideoPlayer");
 const videoPlayer = document.querySelector("#jsVideoPlayer video");
 const playBtn = document.getElementById("jsPlayButton");
 const volumeBtn = document.getElementById("jsVolumeBtn");
+const volumeContainer = document.getElementById("jsVolumeContainer");
 const fullScrnBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("jsCurrentTime");
 const totalTime = document.getElementById("jsTotalTime");
@@ -143,11 +144,21 @@ const handleClickProgress = (e) => {
   const clickedTime = (e.offsetX / progressBar.offsetWidth) * videoPlayer.duration;
   videoPlayer.currentTime = clickedTime;
 };
+
+const handleVolumeMouseOver = () => {
+  volumeRange.style.opacity = "1";
+};
+
+const handleVolumeMouseLeave = () => {
+  volumeRange.style.opacity = "0";
+};
+
 function init() {
-  // videoPlayer.currentTime = 620;
   videoPlayer.volume = 0.5;
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
+  volumeContainer.addEventListener("mouseover", handleVolumeMouseOver);
+  volumeContainer.addEventListener("mouseleave", handleVolumeMouseLeave);
   fullScrnBtn.addEventListener("click", goFullScreen);
   // duration 즉, totalTime이 변경되면 setTotalTime 함수를 호출한다.
   videoPlayer.addEventListener("durationchange", setTotalTime);
