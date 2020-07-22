@@ -8,6 +8,7 @@ const fullScrnBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("jsCurrentTime");
 const totalTime = document.getElementById("jsTotalTime");
 const volumeRange = document.getElementById("jsVolume");
+const progressBar = document.getElementById("js-progressBar");
 
 const registerView = () => {
   const videoId = window.location.href.split("/videos/")[1];
@@ -80,13 +81,14 @@ function goFullScreen() {
 
 // 초를 시간, 분, 초로 변환해주는 함수이다.
 function secondsToHms(d) {
-  let h = Math.floor(d / 3600);
-  let m = Math.floor((d % 3600) / 60);
-  let s = Math.floor((d % 3600) % 60);
+  // let h = Math.floor(d / 3600);
+  // let m = Math.floor((d % 3600) / 60);
+  let m = Math.floor(d / 60);
+  let s = Math.floor((d % 60) % 60);
 
-  if (h < 10) {
-    h = `0${h}`;
-  }
+  // if (h < 10) {
+  //   h = `0${h}`;
+  // }
   if (m < 10) {
     m = `0${m}`;
   }
@@ -94,11 +96,12 @@ function secondsToHms(d) {
     s = `0${s}`;
   }
 
-  return `${h}:${m}:${s} `;
+  return `${m}:${s} `;
 }
 
 function setCurrentTime() {
   currentTime.innerHTML = secondsToHms(Math.floor(videoPlayer.currentTime));
+  progressBar.value = videoPlayer.currentTime;
 }
 
 async function setTotalTime() {
@@ -131,6 +134,15 @@ function handleDrag(event) {
   }
 }
 
+const handleLoadedData = () => {
+  progressBar.setAttribute("max", videoPlayer.duration);
+};
+
+const handleClickProgress = (e) => {
+  // prettier-ignore
+  const clickedTime = (e.offsetX / progressBar.offsetWidth) * videoPlayer.duration;
+  videoPlayer.currentTime = clickedTime;
+};
 function init() {
   // videoPlayer.currentTime = 620;
   videoPlayer.volume = 0.5;
@@ -142,7 +154,9 @@ function init() {
   // currentTime 속성이 변경되면 setCurrentTime 함수를 호출한다.
   videoPlayer.addEventListener("timeupdate", setCurrentTime);
   videoPlayer.addEventListener("ended", handleEnded);
+  videoPlayer.addEventListener("loadeddata", handleLoadedData);
   volumeRange.addEventListener("input", handleDrag);
+  progressBar.addEventListener("click", handleClickProgress);
 }
 
 // videoContainer가 존재할 때만 init()을 실행하도록 한다.
