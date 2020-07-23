@@ -4,10 +4,15 @@
   align-items: center;
   .video__info {
     width: 100%;
-    max-width: 850px;
+    // max-width: 850px;
     margin-top: 25px;
+    border: solid 1px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     button {
-      width: 100px;
+      width: 320px;
       margin-bottom: 25px;
     }
     .video__title,
