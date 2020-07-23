@@ -2,10 +2,12 @@ mixin videoBlock(video = {})
     .videoBlock
         a(href=routes.videoDetail(video.id))
             video.videoBlock__thumbnail(src=video.videoFile, controls=false)            
-            h4.videoBlock__title=video.title
-            span=video.createdAt
-            h6.vidoeBlock__views 조회수 #{video.views}회
-            //- if video.views === 1
-            //-     h6.videoBlock__views 1 view
-            //- else
-            //-     h6.videoBlock__views #{video.views} views
+            .videoBlock__info.info                
+                if video.creator
+                    .info__avatar
+                        img.u-avatar(src=video.creator.avatarUrl)
+                .info__content
+                    h4.videoBlock__title=video.title
+                    h6.vidoeBlock__views 조회수 #{video.views}회
+                
+        

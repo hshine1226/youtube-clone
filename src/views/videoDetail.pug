@@ -7,34 +7,46 @@ block content
             src:video.fileUrl
         })
         .video__info
-            .form-container
-                if loggedUser !== null
-                    if video.creator.id === loggedUser.id
-                        a(href=routes.editVideo(video.id))
-                            button Edit video
-            h5.video__title=video.title
-            p.video__description=video.description
-            if video.views === 1
-                span.video__views 1 view
-            else 
-                span.video__views #{video.views} views
-            .video__author 
-                |Uploaded by 
-                a(href=routes.userDetail(video.creator.id))=video.creator.name
-        .video__comments
+            .video__primary-info
+                h5.video__title=video.title
+                span.video__views 조회수 #{video.views}회
+                
+                
+                .form-container
+                    if loggedUser !== null
+                        if video.creator.id === loggedUser.id
+                            a(href=routes.editVideo(video.id))
+                                button Edit video
+                hr  
+
+            .video__author                 
+                a(href=routes.userDetail(video.creator.id)) 
+                    img.u-avatar(src=video.creator.avatarUrl)
+                    span=video.creator.name
+            .video__description    
+                span=video.description    
+            
+
+        .video__comments            
             span.video__comment-number
                 | 댓글 
-                span#jsCommentNumber=video.comments.length
+                span#jsCommentNumber=comments.length
                 | 개
 
-        
-            form.add__comment#jsAddComment
-                input(type="text", placeholder="Add a comment")
+            if loggedUser
+                form.add__comment#jsAddComment
+                    img.u-avatar(src=loggedUser.avatarUrl)                
+                    input(type="text", placeholder="공개 댓글 추가...")
+            else 
+                form.add__comment#jsAddComment
+                    input(type="text", placeholder="로그인해주세요.")
             ul.video__comments-list#jsCommentList
-                each comment, idx in video.comments.reverse()
-                    .video__comments-list-container
-                        li
-                            span=comment.text                            
+                each comment, idx in comments.reverse()                    
+                    .video__comments-list-container                        
+                        img.u-avatar(src=comment.creator.avatarUrl)                             
+                        li                            
+                            span=comment.text
                         if loggedUser !== null
                             if String(video.comments[idx].creator) === String(loggedUser.id)
-                                span.fas.fa-trash-alt(id=`${comment._id}`) 
+                                .delBtn
+                                    span.fas.fa-trash-alt(id=`${comment._id}`) 

@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const addCommentForm = document.getElementById("jsAddComment");
-
 const commentList = document.getElementById("jsCommentList");
 const commentNumber = document.getElementById("jsCommentNumber");
+const avartar = addCommentForm.querySelector(".u-avatar");
+const avatarUrl = avartar.getAttribute("src");
 
 const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
@@ -13,13 +14,19 @@ const addComment = (comment, commentId) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
   const delBtn = document.createElement("span");
+  const img = document.createElement("img");
+  img.className = "u-avatar";
+  img.src = avatarUrl;
+  div.className = "video__comments-list-container";
   delBtn.id = commentId;
   delBtn.classList.add("fas");
   delBtn.classList.add("fa-trash-alt");
   span.innerHTML = comment;
   li.appendChild(span);
+  div.appendChild(img);
   div.appendChild(li);
   div.appendChild(delBtn);
+
   commentList.prepend(div);
   increaseNumber();
 };

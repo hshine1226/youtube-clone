@@ -19,6 +19,7 @@ block content
         if user.videos == ""
             span -
         .home-videos
+            
             each video in user.videos
                 +videoBlock({
                     id: video.id,

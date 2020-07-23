@@ -9,7 +9,7 @@ const decreaseNumber = () => {
 const handleClick = async (event) => {
   const commentId = event.target.id;
   // const videoId = window.location.href.split("/")[4];
-  const comment = document.getElementById(commentId).parentNode;
+  const comment = document.getElementById(commentId).parentNode.parentNode;
   // console.log(commentId, videoId, comment);
 
   const response = await axios({

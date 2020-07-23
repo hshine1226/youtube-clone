@@ -2,11 +2,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 40px;
+  margin-right: 40px;
+  .videoBlock__info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .info__avatar {
+      height: 60px;
+      .u-avatar {
+        height: 60px;
+        margin-right: 15px;
+        background-color: transparent;
+      }
+    }
+  }
 
   a {
     color: black;
   }
   .videoBlock__thumbnail {
+    width: 100%;
     max-width: 350px;
     height: 200px;
     margin-bottom: 15px;

@@ -5,8 +5,7 @@ import Comment from "../models/Comment";
 export const home = async (req, res) => {
   try {
     // video 정렬 순서를 바꾸기 위해서 id를 기준으로 정렬했다.
-    const videos = await Video.find({}).populate("avatarUrl").sort({ _id: -1 });
-    console.log(videos);
+    const videos = await Video.find({}).populate("creator").sort({ _id: -1 });
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
@@ -59,8 +58,21 @@ export const videoDetail = async (req, res) => {
     const video = await Video.findById(id)
       .populate("creator")
       .populate("comments");
-    console.log(video);
-    res.render("videoDetail", { pageTitle: video.title, video });
+
+    const videoComments = video.comments;
+
+    let comments = [];
+
+    for (let videoComment of videoComments) {
+      const comment = await Comment.findById(videoComment._id).populate(
+        "creator"
+      );
+      comments.push(comment);
+    }
+
+    console.log(comments);
+
+    res.render("videoDetail", { pageTitle: video.title, video, comments });
   } catch (err) {
     res.redirect(routes.home);
   }
