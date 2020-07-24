@@ -47,6 +47,7 @@ block content
                         li                            
                             span=comment.text
                         if loggedUser !== null
-                            if String(video.comments[idx].creator) === String(loggedUser.id)
+                            
+                            if String(comment.creator._id) === String(loggedUser.id)
                                 .delBtn
                                     span.fas.fa-trash-alt(id=`${comment._id}`) 
