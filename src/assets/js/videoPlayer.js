@@ -103,6 +103,7 @@ function secondsToHms(d) {
 function setCurrentTime() {
   currentTime.innerHTML = secondsToHms(Math.floor(videoPlayer.currentTime));
   progressBar.value = videoPlayer.currentTime;
+  totalTime.innerHTML = secondsToHms(videoPlayer.duration);
 }
 
 async function setTotalTime() {
