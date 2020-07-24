@@ -70,8 +70,6 @@ export const videoDetail = async (req, res) => {
       comments.push(comment);
     }
 
-    console.log(comments);
-
     res.render("videoDetail", { pageTitle: video.title, video, comments });
   } catch (err) {
     res.redirect(routes.home);
@@ -163,6 +161,7 @@ export const postAddComment = async (req, res) => {
     });
     video.comments.push(newComment.id);
     video.save();
+
     const commentId = newComment.id;
     res.send(commentId);
   } catch (error) {
@@ -175,10 +174,16 @@ export const postAddComment = async (req, res) => {
 export const postDelComment = async (req, res) => {
   const {
     body: { commentId },
+    user: { _id: userId },
   } = req;
 
   try {
-    await Comment.findByIdAndDelete(commentId);
+    const comment = await Comment.findById(commentId);
+    if (String(comment.creator) === String(userId)) {
+      await Comment.findByIdAndDelete(commentId);
+    } else {
+      console.log("djdndn");
+    }
   } catch (error) {
     res.status(400);
   } finally {
