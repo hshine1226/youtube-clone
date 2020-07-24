@@ -35,7 +35,7 @@ block content
 
             if loggedUser
                 form.add__comment#jsAddComment
-                    img.u-avatar(src=loggedUser.avatarUrl)                
+                    img.u-avatar(src=loggedUser.avatarUrl id="js-userAvatar")                
                     input(type="text", placeholder="공개 댓글 추가...")
             else 
                 form.add__comment#jsAddComment
@@ -43,7 +43,7 @@ block content
             ul.video__comments-list#jsCommentList
                 each comment, idx in comments.reverse()                    
                     .video__comments-list-container                        
-                        img.u-avatar(src=comment.creator.avatarUrl, id="js-userAvatar")                             
+                        img.u-avatar(src=comment.creator.avatarUrl)                             
                         li                            
                             span=comment.text
                         if loggedUser !== null

@@ -8,24 +8,27 @@ const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
 };
 const addComment = (comment, commentId) => {
-  const avartar = addCommentForm.getElementById("js-userAvatar");
+  const avartar = document.getElementById("js-userAvatar");
   const avatarUrl = avartar.getAttribute("src");
   const div = document.createElement("div");
   const li = document.createElement("li");
   const span = document.createElement("span");
+  const delBtnContainer = document.createElement("div");
   const delBtn = document.createElement("span");
   const img = document.createElement("img");
   img.className = "u-avatar";
   img.src = avatarUrl;
   div.className = "video__comments-list-container";
+  delBtnContainer.className = "delBtn";
   delBtn.id = commentId;
   delBtn.classList.add("fas");
   delBtn.classList.add("fa-trash-alt");
+  delBtnContainer.appendChild(delBtn);
   span.innerHTML = comment;
   li.appendChild(span);
   div.appendChild(img);
   div.appendChild(li);
-  div.appendChild(delBtn);
+  div.appendChild(delBtnContainer);
 
   commentList.prepend(div);
   increaseNumber();
