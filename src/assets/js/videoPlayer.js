@@ -141,6 +141,11 @@ const handleLoadedData = () => {
   totalTime.innerHTML = secondsToHms(videoPlayer.duration);
 };
 
+const handleLoadedMetaData = () => {
+  progressBar.setAttribute("max", videoPlayer.duration);
+  totalTime.innerHTML = secondsToHms(videoPlayer.duration);
+};
+
 const handleClickProgress = (e) => {
   // prettier-ignore
   const clickedTime = (e.offsetX / progressBar.offsetWidth) * videoPlayer.duration;
@@ -168,6 +173,7 @@ function init() {
   videoPlayer.addEventListener("timeupdate", setCurrentTime);
   videoPlayer.addEventListener("ended", handleEnded);
   videoPlayer.addEventListener("loadeddata", handleLoadedData);
+  videoPlayer.addEventListener("loadedmetadata", handleLoadedMetaData);
   volumeRange.addEventListener("input", handleDrag);
   progressBar.addEventListener("click", handleClickProgress);
 }
