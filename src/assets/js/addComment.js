@@ -3,13 +3,13 @@ import axios from "axios";
 const addCommentForm = document.getElementById("jsAddComment");
 const commentList = document.getElementById("jsCommentList");
 const commentNumber = document.getElementById("jsCommentNumber");
-const avartar = addCommentForm.querySelector(".u-avatar");
-const avatarUrl = avartar.getAttribute("src");
 
 const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
 };
 const addComment = (comment, commentId) => {
+  const avartar = addCommentForm.getElementById("js-userAvatar");
+  const avatarUrl = avartar.getAttribute("src");
   const div = document.createElement("div");
   const li = document.createElement("li");
   const span = document.createElement("span");

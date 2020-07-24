@@ -1,9 +1,9 @@
 .videoBlock {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 40px;
-  margin-right: 40px;
+  padding: 20px 10px;
   .videoBlock__info {
     display: flex;
     justify-content: flex-start;
@@ -20,16 +20,26 @@
 
   a {
     color: black;
+    width: 100%;
   }
   .videoBlock__thumbnail {
     width: 100%;
-    max-width: 350px;
-    height: 200px;
+    // max-width: 350px;
+    height: 430px;
     margin-bottom: 15px;
   }
   .videoBlock__title {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .videoBlock {
+    padding: 20px 40px;
+    .videoBlock__thumbnail {
+      height: 250px;
+    }
   }
 }

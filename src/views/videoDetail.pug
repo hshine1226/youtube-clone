@@ -43,7 +43,7 @@ block content
             ul.video__comments-list#jsCommentList
                 each comment, idx in comments.reverse()                    
                     .video__comments-list-container                        
-                        img.u-avatar(src=comment.creator.avatarUrl)                             
+                        img.u-avatar(src=comment.creator.avatarUrl, id="js-userAvatar")                             
                         li                            
                             span=comment.text
                         if loggedUser !== null

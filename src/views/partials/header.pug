@@ -1,37 +1,44 @@
 header.header
-	.header__wrapper
-		.header__column
+	.header__navBar.navBar
+		.header.navBar__logo
 			a.youtube-logo(href=routes.home)
 				i.fab.fa-youtube
 				span BellmyTube
-		.header__column
-			form(action=routes.search, method="get", id="search-form")
-				.input__container
-					input(type="text", placeholder="검색", name="term")
-					<a href="#" onclick="document.getElementById('search-form').submit()">
-						.search__container
-							i.fas.fa-search
-					</a>
-		.header__column
+		.header.navBar__search
+			.search__wrapper
+				form(action=routes.search, method="get", id="search-form")
+					.input__container
+						input(type="text", placeholder="검색", name="term")
+						<a href="#" onclick="document.getElementById('search-form').submit()">
+							.search__container
+								i.fas.fa-search
+						</a>
+		.header.navBar__menu
 			ul
 				if !loggedUser
 					li
-						a(href=routes.join) Join
+						a(href=routes.join) 회원가입
 					li
-						a(href=routes.login) Log In
+						a(href=routes.login) 로그인
 				else
 					li
 						a(href=`/videos${routes.upload}`)
-							.upload-icon
-								i.fas.fa-upload
+							//- .upload-icon
+							//- 	i.fas.fa-upload
+							span 업로드
 					li
 						if loggedUser.avatarUrl
 							a(href=routes.me)
-								img.u-avatar(src=loggedUser.avatarUrl)
+								span 프로필
+							//- 	img.u-avatar(src=loggedUser.avatarUrl)
 						else	
 							a(href=routes.me)
-								span Profile
+								span 프로필
 					li
 						a(href=routes.logout)
-							.logout-icon
-								i.fas.fa-sign-out-alt
+							span 로그아웃
+							//- .logout-icon
+							//- 	i.fas.fa-sign-out-alt
+		.toggle-bar(id="js-toggleBtn")
+			i.fas.fa-bars
+	
