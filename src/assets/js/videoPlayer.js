@@ -137,6 +137,7 @@ function handleDrag(event) {
 
 const handleLoadedData = () => {
   progressBar.setAttribute("max", videoPlayer.duration);
+  totalTime.innerHTML = secondsToHms(videoPlayer.duration);
 };
 
 const handleClickProgress = (e) => {
