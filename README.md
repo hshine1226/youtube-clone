@@ -2,26 +2,11 @@
 
 동영상 플랫폼 YouTube를 따라서 만드는 프로젝트
 
-Front-end는 Framework를 사용하지 않고 VanillaJS를 통해서 구현
+Front-end는 Framework를 사용하지 않고 **VanillaJS**를 통해서 구현
 
 Back-end는 NodeJS와 MongoDB를 통해서 구현
 
 Full-stack 개발 경험을 목표로 CRUD의 모든 기능을 구현하는 것을 목표로 합니다.
-
-## 기능
-
-- 회원가입
-- 로그인/로그아웃
-- 소셜 로그인(Github, Facebook, Google)
-- 비밀번호 변경
-- 동영상 업데이트/수정/삭제
-- 동영상 검색
-- 댓글 추가/삭제
-- 프로필 수정
-
-## 개발 기간
-
-2020년 05월 ~ 2020년 07월
 
 ## 사용기술
 
@@ -39,6 +24,21 @@ Full-stack 개발 경험을 목표로 CRUD의 모든 기능을 구현하는 것�
 - Mongoose
 - Passport
 - Amazon S3
+
+## 개발 기간
+
+2020년 05월 ~ 2020년 07월
+
+## 기능
+
+- 회원가입
+- 로그인/로그아웃
+- 소셜 로그인(Github, Facebook, Google)
+- 비밀번호 변경
+- 동영상 업데이트/수정/삭제
+- 동영상 검색
+- 댓글 추가/삭제
+- 프로필 수정
 
 ## 구현 화면
 
